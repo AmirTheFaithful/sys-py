@@ -2,6 +2,9 @@ from dataclasses import dataclass
 from uuid import uuid4
 from typing import Any
 
+# Local imports
+from env.colors import GREEN, BLUE, RESET
+
 @dataclass
 class Port:
   id: str
@@ -37,4 +40,4 @@ class Unit:
   # Log short info about each port
   def log_ports(self) -> None:
     for id, port in self._ports.items():
-      print(f"{id}: {port.in_use}")
+      print(GREEN + f"{id}" + RESET + ": " + BLUE + f"{port.in_use}" + RESET)
