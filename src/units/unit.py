@@ -4,18 +4,12 @@ from typing import Any
 
 # Local imports
 from env.colors import GREEN, BLUE, RESET
+from env.exceptions import NoFreePorts
 
 @dataclass
 class Port:
   id: str
   in_use: bool
-
-# Data Transport Unit
-class DTU:
-  _store: dict[str, Port]
-
-  def __init__(self):
-    self._store = {}
 
 class Unit:
   _ports: dict[str, Port] = {}
@@ -41,3 +35,23 @@ class Unit:
   def log_ports(self) -> None:
     for id, port in self._ports.items():
       print(GREEN + f"{id}" + RESET + ": " + BLUE + f"{port.in_use}" + RESET)
+  
+  # Return first found free port, if it's so
+  def get_free_port(self) -> Port:
+    for port in self._ports.values():
+      if port.in_use:
+        return port
+      else:
+        continue
+    
+    raise 
+
+# Data Transport Unit
+class DTU:
+  _store: dict[str, Port]
+
+  def __init__(self):
+    self._store = {}
+  
+  def connect(self, dest: Unit) -> int:
+    free_port = dest.get_free_port()
