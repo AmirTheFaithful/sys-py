@@ -1,15 +1,10 @@
-from dataclasses import dataclass
 from uuid import uuid4
 from typing import Any
 
 # Local imports
-from env.colors import GREEN, BLUE, RED, RESET
+from env.colors import GREEN, BLUE, RESET
 from env.exceptions import NoFreePorts
-
-@dataclass
-class Port:
-  id: str
-  in_use: bool
+from port import Port
 
 class Unit:
   _ports: dict[str, Port] = {}
