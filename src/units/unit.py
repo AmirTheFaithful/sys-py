@@ -3,7 +3,7 @@ from uuid import uuid4
 from typing import Any
 
 # Local imports
-from env.colors import GREEN, BLUE, RESET
+from env.colors import GREEN, BLUE, RED, RESET
 from env.exceptions import NoFreePorts
 
 @dataclass
@@ -44,14 +44,19 @@ class Unit:
       else:
         continue
     
-    raise 
+    raise NoFreePorts(msg="Unit has no free ports to connect.", err_code=500)
 
 # Data Transport Unit
 class DTU:
   _store: dict[str, Port]
+  _dest: Unit | None
 
   def __init__(self):
     self._store = {}
+    self._dest = None
   
   def connect(self, dest: Unit) -> int:
-    free_port = dest.get_free_port()
+    try:
+      free_port = dest.get_free_port()
+    except NoFreePorts:
+      print(RED + "No free ports found in unit " + RESET)

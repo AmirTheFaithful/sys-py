@@ -1,8 +1,8 @@
 class NoFreePorts(Exception):
   message: str
 
-  def __init__(self, message: str, err_code: int):
-    self.message = message
+  def __init__(self, msg: str, err_code: int):
+    self.message = msg
     self.err_code = err_code
     super().__init__(self.message)
 
