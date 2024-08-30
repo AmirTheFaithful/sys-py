@@ -4,6 +4,7 @@ from typing import Any
 # Local imports
 from env.colors import GREEN, BLUE, RESET
 from env.exceptions import NoFreePorts
+
 from port import Port
 
 class Unit:
@@ -23,7 +24,7 @@ class Unit:
     # Initialize three ports one by one
     for index in range(1, 4):
       port_id: str = f"U#{index}:{uuid4()}"
-      port: Port = Port(id=port_id, in_use=False)
+      port: Port = Port(id=port_id)
       self._ports[port_id] = port
   
   # Log short info about each port
