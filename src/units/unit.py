@@ -5,7 +5,7 @@ from typing import Any
 from env.colors import GREEN, BLUE, RESET
 from env.exceptions import NoFreePorts
 
-from port import Port
+from units.port import Port
 
 class Unit:
   _ports: dict[str, Port] = {}
@@ -35,7 +35,7 @@ class Unit:
   # Return first found free port, if it's so
   def get_free_port(self) -> Port:
     for port in self._ports.values():
-      if port.in_use:
+      if not port.in_use:
         return port
       else:
         continue
