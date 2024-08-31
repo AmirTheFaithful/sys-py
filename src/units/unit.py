@@ -41,3 +41,10 @@ class Unit:
         continue
     
     raise NoFreePorts(msg="Unit has no free ports to connect.", err_code=500)
+  
+  def set_data(self, key: str, value: Any) -> None:
+    # First check if such key exists
+    if self._storage[key]:
+      pass
+    else:
+      self._storage[key] = value
