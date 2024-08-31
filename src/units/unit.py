@@ -3,7 +3,7 @@ from typing import Any
 
 # Local imports
 from env.colors import GREEN, BLUE, RESET
-from env.exceptions import NoFreePorts
+from env.exceptions import NoFreePorts, StorageDuplicateData
 
 from units.port import Port
 
@@ -44,7 +44,7 @@ class Unit:
   
   def set_data(self, key: str, value: Any) -> None:
     # First check if such key exists
-    if self._storage[key]:
-      pass
+    if key in self._storage:
+      raise StorageDuplicateData(msg=f"The storage of the unit already has the key \"{key}\"", err_code=501)
     else:
       self._storage[key] = value
