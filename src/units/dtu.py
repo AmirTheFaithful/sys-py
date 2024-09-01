@@ -6,17 +6,23 @@ from units.port import Port
 from units.unit import Unit
 from env.colors import RED, RESET
 from env.exceptions import NoFreePorts
+from enum import Enum
+
+class DTUFlags(Enum):
+  TRANSFER = 0
 
 # Data Transport Unit
 class DTU:
   _store: dict[str, Port]
   _dest: Optional[Unit]
   _port: Port
+  _flag: int
 
-  def __init__(self):
+  def __init__(self, flag: int):
     self._store = {}
     self._dest = None
     self._port = Port(uuid4())
+    self._flag = flag
   
   def connect(self, dest: Unit) -> int:
     try:
