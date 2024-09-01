@@ -1,3 +1,9 @@
+from enum import Enum
+
+class ErrorCodes(Enum):
+  NO_FREE_PORTS = 500
+  STRG_DPLCT_DT = 501
+
 class NoFreePorts(Exception):
   message: str
 
