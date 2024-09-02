@@ -1,6 +1,8 @@
 from uuid import uuid4
 from typing import Any
 
+from ds.linked_list import LinkedList
+
 # Local imports
 from env.colors import GREEN, BLUE, RESET
 from env.exceptions import NoFreePorts, StorageDuplicateData
@@ -10,12 +12,15 @@ from units.port import Port
 class Unit:
   _ports: dict[str, Port] = {}
   # For now, the storage will be just a dict
-  _storage: dict[str, Any] = {}
-  status: str = "public"
+  _storage: LinkedList
+  status: str
 
   def __init__(self):
     # First generate ports:
     self._gen_ports()
+
+    self.storage = LinkedList()
+    self.status = "public"
 
   def _gen_ports(self) -> None:
     if self._ports:

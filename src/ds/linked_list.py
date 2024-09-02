@@ -1,5 +1,4 @@
-from typing import Any, Union, Optional
-from typing_extensions import Self
+from typing_extensions import Self, Any, Union, Optional
 
 class LLNode:
   _data: Any
